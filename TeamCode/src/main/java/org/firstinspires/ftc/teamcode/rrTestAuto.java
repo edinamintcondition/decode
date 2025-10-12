@@ -33,7 +33,7 @@ public class rrTestAuto extends LinearOpMode {
 
     public static Pose2d startingPosition = new Pose2d(0,0,0);
     public static Vector2d waypoint1 = new Vector2d(15,15);
-    public static Vector2d waypoint2 =new Vector2d(20,20)
+    public static Vector2d waypoint2 =new Vector2d(20,20);
     public static Double eps = 1.0;
 
     ElapsedTime feederTimer = new ElapsedTime();

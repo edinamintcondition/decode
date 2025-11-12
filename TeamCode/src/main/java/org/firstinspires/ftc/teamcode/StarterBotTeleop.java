@@ -71,7 +71,7 @@ public class StarterBotTeleop extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 50;
+    final double LAUNCHER_TARGET_VELOCITY = 75;
     final double LAUNCHER_MIN_VELOCITY = 40;
 
     // Declare OpMode members.
@@ -146,8 +146,8 @@ public class StarterBotTeleop extends OpMode {
          */
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         /*
          * Here we set our launcher to the RUN_USING_ENCODER runmode.
@@ -181,7 +181,7 @@ public class StarterBotTeleop extends OpMode {
          * Much like our drivetrain motors, we set the left feeder servo to reverse so that they
          * both work to feed the ball into the robot.
          */
-        leftFeeder.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFeeder.setDirection(DcMotor.Direction.REVERSE);
 
         /*
          * Tell the driver that initialization is complete.
@@ -224,7 +224,12 @@ public class StarterBotTeleop extends OpMode {
          * queuing a shot.
          */
         if (gamepad1.y) {
+            telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+            leftFeeder.setPower(FULL_SPEED);
+            rightFeeder.setPower(FULL_SPEED);
+            telemetry.addData("Servo values", leftFeeder.getPower());
+            telemetry.addData("Servo values", rightFeeder.getPower());
         } else if (gamepad1.b) { // stop flywheel
             launcher.setVelocity(STOP_SPEED);
         }

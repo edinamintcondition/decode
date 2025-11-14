@@ -71,8 +71,8 @@ public class StarterBotTeleop extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 75;
-    final double LAUNCHER_MIN_VELOCITY = 40;
+    final double LAUNCHER_TARGET_VELOCITY = 100;
+    final double LAUNCHER_MIN_VELOCITY = 65;
 
     // Declare OpMode members.
     private DcMotor leftFrontDrive = null;
@@ -226,8 +226,8 @@ public class StarterBotTeleop extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            leftFeeder.setPower(FULL_SPEED);
-            rightFeeder.setPower(FULL_SPEED);
+            leftFeeder.setPower(-1.0);
+            rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
             telemetry.addData("Servo values", rightFeeder.getPower());
         } else if (gamepad1.b) { // stop flywheel

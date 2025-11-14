@@ -85,6 +85,8 @@ public class StarterBotTeleop extends OpMode {
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
 
+   // private DcMotor intake = null;
+
     ElapsedTime feederTimer = new ElapsedTime();
 
     /*
@@ -133,7 +135,8 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRightMotor");
-        
+       // intake = hardwareMap.get(DcMotor.class, "intake");
+
         launcher = hardwareMap.get(DcMotorEx.class, "launcher");
         leftFeeder = hardwareMap.get(CRServo.class, "left_feeder");
         rightFeeder = hardwareMap.get(CRServo.class, "right_feeder");
@@ -169,6 +172,7 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         launcher.setZeroPowerBehavior(BRAKE);
+       // intake.setZeroPowerBehavior(BRAKE);
 
         /*
          * set Feeders to an initial value to initialize the servo controller
@@ -228,6 +232,7 @@ public class StarterBotTeleop extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+            //intake.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
@@ -236,6 +241,7 @@ public class StarterBotTeleop extends OpMode {
             launcher.setVelocity(STOP_SPEED);
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);
+           // intake.setPower(STOP_SPEED);
             telemetry.addData("Gamepad B pressed", true);
             // launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
         }
@@ -244,6 +250,7 @@ public class StarterBotTeleop extends OpMode {
             launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
             leftFeeder.setPower(-1.0);
             rightFeeder.setPower(1.0);
+           // intake.setPower(-1.0);
         }
 
 

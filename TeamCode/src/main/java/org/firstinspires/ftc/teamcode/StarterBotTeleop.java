@@ -72,6 +72,7 @@ public class StarterBotTeleop extends OpMode {
      * at. The minimum velocity is a threshold for determining when to fire.
      */
     final double LAUNCHER_TARGET_VELOCITY = 100;
+    final double LAUNCHER_TARGET_REVERSE_VELOCITY = -100;
     final double LAUNCHER_MIN_VELOCITY = 65;
 
     // Declare OpMode members.
@@ -182,6 +183,7 @@ public class StarterBotTeleop extends OpMode {
          * both work to feed the ball into the robot.
          */
         leftFeeder.setDirection(DcMotor.Direction.REVERSE);
+        rightFeeder.setDirection(DcMotor.Direction.REVERSE);
 
         /*
          * Tell the driver that initialization is complete.
@@ -226,13 +228,25 @@ public class StarterBotTeleop extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            leftFeeder.setPower(-1.0);
+            leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
             telemetry.addData("Servo values", rightFeeder.getPower());
         } else if (gamepad1.b) { // stop flywheel
             launcher.setVelocity(STOP_SPEED);
+            leftFeeder.setPower(STOP_SPEED);
+            rightFeeder.setPower(STOP_SPEED);
+            telemetry.addData("Gamepad B pressed", true);
+            // launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
         }
+        else if (gamepad1.x) { // reverse direction
+            telemetry.addData("Gamepad X pressed", true);
+            launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
+            leftFeeder.setPower(-1.0);
+            rightFeeder.setPower(1.0);
+        }
+
+
 
         /*
          * Now we call our "Launch" function.
@@ -255,21 +269,6 @@ public class StarterBotTeleop extends OpMode {
     public void stop() {
     }
 
-    void arcadeDriveOld() {
-
-        double forward = -gamepad1.left_stick_y;
-        double rotate=gamepad1.right_stick_x;
-        leftPower = forward + rotate;
-        rightPower = forward - rotate;
-
-        /*
-         * Send calculated power to wheels
-         */
-        leftFrontDrive.setPower(leftPower);
-        rightFrontDrive.setPower(rightPower);
-        leftBackDrive.setPower(leftPower);
-        rightBackDrive.setPower(rightPower);
-    }
 
     void arcadeDrive(){
         double max;

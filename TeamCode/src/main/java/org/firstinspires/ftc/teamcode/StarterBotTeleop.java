@@ -81,8 +81,8 @@ public class StarterBotTeleop extends OpMode {
 
     private DcMotor rightBackDrive = null;
     private DcMotorEx launcher = null;
-  //  private CRServo leftFeeder = null;
-   // private CRServo rightFeeder = null;
+    private CRServo leftFeeder = null;
+    private CRServo rightFeeder = null;
 
     ElapsedTime feederTimer = new ElapsedTime();
 

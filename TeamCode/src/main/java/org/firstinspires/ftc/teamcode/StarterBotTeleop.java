@@ -242,15 +242,18 @@ public class StarterBotTeleop extends OpMode {
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);
            // intake.setPower(STOP_SPEED);
-            telemetry.addData("Gamepad B pressed", true);
-            // launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-        }
-        else if (gamepad1.x) { // reverse direction
-            telemetry.addData("Gamepad X pressed", true);
+            telemetry.addData("Gamepad b pressed", true);
+        } else if (gamepad1.x) { // reverse direction
+            telemetry.addData("Gamepad x pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
             leftFeeder.setPower(-1.0);
             rightFeeder.setPower(1.0);
            // intake.setPower(-1.0);
+        } if (gamepad1.a) {
+            telemetry.addData("Gamepad a pressed", true);
+            //intake.setPower(1.0);
+            leftFeeder.setPower(1.0);
+            rightFeeder.setPower(-1.0);
         }
 
 

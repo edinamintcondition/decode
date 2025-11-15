@@ -85,7 +85,7 @@ public class StarterBotTeleop extends OpMode {
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
 
-   // private DcMotor intake = null;
+    private DcMotor intake = null;
 
     ElapsedTime feederTimer = new ElapsedTime();
 
@@ -135,7 +135,7 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRightMotor");
-       // intake = hardwareMap.get(DcMotor.class, "intake");
+        intake = hardwareMap.get(DcMotor.class, "intake");
 
         launcher = hardwareMap.get(DcMotorEx.class, "launcher");
         leftFeeder = hardwareMap.get(CRServo.class, "left_feeder");
@@ -172,7 +172,7 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         launcher.setZeroPowerBehavior(BRAKE);
-       // intake.setZeroPowerBehavior(BRAKE);
+        intake.setZeroPowerBehavior(BRAKE);
 
         /*
          * set Feeders to an initial value to initialize the servo controller
@@ -232,7 +232,7 @@ public class StarterBotTeleop extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            //intake.setPower(1.0);
+            intake.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
@@ -241,19 +241,28 @@ public class StarterBotTeleop extends OpMode {
             launcher.setVelocity(STOP_SPEED);
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);
-           // intake.setPower(STOP_SPEED);
+            intake.setPower(STOP_SPEED);
             telemetry.addData("Gamepad b pressed", true);
         } else if (gamepad1.x) { // reverse direction
             telemetry.addData("Gamepad x pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
             leftFeeder.setPower(-1.0);
             rightFeeder.setPower(1.0);
-           // intake.setPower(-1.0);
-        } if (gamepad1.a) {
+            intake.setPower(-1.0);
+        }
+        if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed", true);
-            //intake.setPower(1.0);
+            intake.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
+        }
+        if (gamepad1.rightBumperWasPressed()) {
+            telemetry.addData("rightBumperWasPressed", true);
+            launcher.setVelocity(100.0);
+            intake.setPower(1.0);
+            leftFeeder.setPower(1.0);
+            rightFeeder.setPower(-1.0);
+            telemetry.addData("speed is", launcher.getVelocity());
         }
 
 
@@ -261,7 +270,7 @@ public class StarterBotTeleop extends OpMode {
         /*
          * Now we call our "Launch" function.
          */
-        launch(gamepad1.rightBumperWasPressed());
+      //  launch(gamepad1.rightBumperWasPressed());
 
         /*
          * Show the state and motor powers

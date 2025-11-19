@@ -260,6 +260,7 @@ public class StarterBotTeleop extends OpMode {
         }
         if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed", true);
+            launcher.setVelocity(STOP_SPEED);
             intake.setPower(1.0);
             pusher.setPower(1.0);
             leftFeeder.setPower(1.0);

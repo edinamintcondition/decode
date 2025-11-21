@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-package org.firstinspires.ftc.teamcode;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.telemetry.PanelsTelemetry;
@@ -12,8 +11,7 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-
+import pedroPathing.Constants;
 @Autonomous(name = "Pedro Pathing Autonomous", group = "Autonomous")
 @Configurable // Panels
 public class AutoRED2 extends OpMode {

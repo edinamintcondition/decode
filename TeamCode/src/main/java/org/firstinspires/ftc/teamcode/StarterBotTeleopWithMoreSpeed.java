@@ -34,7 +34,6 @@ package org.firstinspires.ftc.teamcode;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -59,9 +58,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * we will also need to adjust the "PIDF" coefficients with some that are a better fit for our application.
  */
 
-@TeleOp(name = "StarterBotTeleop1", group = "StarterBot")
-@Disabled
-public class StarterBotAuto extends OpMode {
+@TeleOp(name = "StarterBotTeleopWithMoreSpeed", group = "StarterBot")
+//@Disabled
+public class StarterBotTeleopWithMoreSpeed extends OpMode {
     final double FEED_TIME_SECONDS = 0.50; //The feeder servos run this long when a shot is requested.
     final double STOP_SPEED = 0.0; //We send this power to the servos when we want them to stop.
     final double FULL_SPEED = 1.0;
@@ -72,8 +71,8 @@ public class StarterBotAuto extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 80;
-    final double LAUNCHER_TARGET_REVERSE_VELOCITY = -80;
+    final double LAUNCHER_TARGET_VELOCITY = 90;
+    final double LAUNCHER_TARGET_REVERSE_VELOCITY = -90;
     final double LAUNCHER_MIN_VELOCITY = 65;
 
     // Declare OpMode members.
@@ -83,13 +82,12 @@ public class StarterBotAuto extends OpMode {
 
     private DcMotor rightBackDrive = null;
     private DcMotorEx launcher = null;
-    private DcMotor pusher = null;
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
 
-    private DcMotor intake = null;
+    // private DcMotor intake = null;
 
-    // ElapsedTime feederTimer = new ElapsedTime();
+    ElapsedTime feederTimer = new ElapsedTime();
 
     /*
      * TECH TIP: State Machines
@@ -137,10 +135,9 @@ public class StarterBotAuto extends OpMode {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRightMotor");
-        intake = hardwareMap.get(DcMotor.class, "intake");
+        // intake = hardwareMap.get(DcMotor.class, "intake");
 
         launcher = hardwareMap.get(DcMotorEx.class, "launcher");
-        pusher = hardwareMap.get(DcMotorEx.class, "pusher");
         leftFeeder = hardwareMap.get(CRServo.class, "left_feeder");
         rightFeeder = hardwareMap.get(CRServo.class, "right_feeder");
 
@@ -165,7 +162,6 @@ public class StarterBotAuto extends OpMode {
          */
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
         /*
          * Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to
          * slow down much faster when it is coasting. This creates a much more controllable
@@ -176,8 +172,7 @@ public class StarterBotAuto extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         launcher.setZeroPowerBehavior(BRAKE);
-        intake.setZeroPowerBehavior(BRAKE);
-        pusher.setZeroPowerBehavior(BRAKE);
+        // intake.setZeroPowerBehavior(BRAKE);
 
         /*
          * set Feeders to an initial value to initialize the servo controller
@@ -237,8 +232,7 @@ public class StarterBotAuto extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            intake.setPower(1.0);
-            pusher.setPower(1.0);
+            //intake.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
@@ -247,32 +241,19 @@ public class StarterBotAuto extends OpMode {
             launcher.setVelocity(STOP_SPEED);
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);
-            intake.setPower(STOP_SPEED);
-            pusher.setPower(STOP_SPEED);
+            // intake.setPower(STOP_SPEED);
             telemetry.addData("Gamepad b pressed", true);
         } else if (gamepad1.x) { // reverse direction
             telemetry.addData("Gamepad x pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
             leftFeeder.setPower(-1.0);
             rightFeeder.setPower(1.0);
-            intake.setPower(-1.0);
-            pusher.setPower(-1.0);
-        }
-        if (gamepad1.a) {
+            // intake.setPower(-1.0);
+        } if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed", true);
-            intake.setPower(1.0);
-            pusher.setPower(1.0);
+            //intake.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
-        }
-        if (gamepad1.rightBumperWasPressed()) {
-            telemetry.addData("rightBumperWasPressed", true);
-            launcher.setVelocity(100.0);
-            intake.setPower(1.0);
-            pusher.setPower(1.0);
-            leftFeeder.setPower(1.0);
-            rightFeeder.setPower(-1.0);
-            telemetry.addData("speed is", launcher.getVelocity());
         }
 
 
@@ -280,7 +261,7 @@ public class StarterBotAuto extends OpMode {
         /*
          * Now we call our "Launch" function.
          */
-        //  launch(gamepad1.rightBumperWasPressed());
+        launch(gamepad1.rightBumperWasPressed());
 
         /*
          * Show the state and motor powers
@@ -339,7 +320,6 @@ public class StarterBotAuto extends OpMode {
         telemetry.update();
     }
 
-    /*
     void launch(boolean shotRequested) {
         telemetry.addData("into launch ",shotRequested);
         switch (launchState) {
@@ -378,5 +358,5 @@ public class StarterBotAuto extends OpMode {
                 }
                 break;
         }
-    } */
+    }
 }

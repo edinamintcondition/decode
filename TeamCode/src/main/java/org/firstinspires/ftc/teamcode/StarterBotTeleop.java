@@ -34,6 +34,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -82,12 +83,13 @@ public class StarterBotTeleop extends OpMode {
 
     private DcMotor rightBackDrive = null;
     private DcMotorEx launcher = null;
+    private DcMotor pusher = null;
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
 
-   // private DcMotor intake = null;
+    private DcMotor intake = null;
 
-    ElapsedTime feederTimer = new ElapsedTime();
+    // ElapsedTime feederTimer = new ElapsedTime();
 
     /*
      * TECH TIP: State Machines
@@ -135,9 +137,10 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRightMotor");
-       // intake = hardwareMap.get(DcMotor.class, "intake");
+        intake = hardwareMap.get(DcMotor.class, "intake");
 
         launcher = hardwareMap.get(DcMotorEx.class, "launcher");
+        pusher = hardwareMap.get(DcMotorEx.class, "pusher");
         leftFeeder = hardwareMap.get(CRServo.class, "left_feeder");
         rightFeeder = hardwareMap.get(CRServo.class, "right_feeder");
 
@@ -162,6 +165,7 @@ public class StarterBotTeleop extends OpMode {
          */
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+
         /*
          * Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to
          * slow down much faster when it is coasting. This creates a much more controllable
@@ -172,7 +176,8 @@ public class StarterBotTeleop extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         launcher.setZeroPowerBehavior(BRAKE);
-       // intake.setZeroPowerBehavior(BRAKE);
+        intake.setZeroPowerBehavior(BRAKE);
+        pusher.setZeroPowerBehavior(BRAKE);
 
         /*
          * set Feeders to an initial value to initialize the servo controller
@@ -232,7 +237,8 @@ public class StarterBotTeleop extends OpMode {
         if (gamepad1.y) {
             telemetry.addData("Gamepad Y pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            //intake.setPower(1.0);
+            intake.setPower(1.0);
+            pusher.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("Servo values", leftFeeder.getPower());
@@ -241,16 +247,33 @@ public class StarterBotTeleop extends OpMode {
             launcher.setVelocity(STOP_SPEED);
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);
-           // intake.setPower(STOP_SPEED);
-            telemetry.addData("Gamepad B pressed", true);
-            // launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-        }
-        else if (gamepad1.x) { // reverse direction
-            telemetry.addData("Gamepad X pressed", true);
+            intake.setPower(STOP_SPEED);
+            pusher.setPower(STOP_SPEED);
+            telemetry.addData("Gamepad b pressed", true);
+        } else if (gamepad1.x) { // reverse direction
+            telemetry.addData("Gamepad x pressed", true);
             launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
             leftFeeder.setPower(-1.0);
             rightFeeder.setPower(1.0);
-           // intake.setPower(-1.0);
+            intake.setPower(-1.0);
+            pusher.setPower(-1.0);
+        }
+        if (gamepad1.a) {
+            telemetry.addData("Gamepad a pressed", true);
+            launcher.setVelocity(STOP_SPEED);
+            intake.setPower(1.0);
+            pusher.setPower(1.0);
+            leftFeeder.setPower(1.0);
+            rightFeeder.setPower(-1.0);
+        }
+        if (gamepad1.rightBumperWasPressed()) {
+            telemetry.addData("rightBumperWasPressed", true);
+            launcher.setVelocity(100.0);
+            intake.setPower(1.0);
+            pusher.setPower(1.0);
+            leftFeeder.setPower(1.0);
+            rightFeeder.setPower(-1.0);
+            telemetry.addData("speed is", launcher.getVelocity());
         }
 
 
@@ -258,7 +281,7 @@ public class StarterBotTeleop extends OpMode {
         /*
          * Now we call our "Launch" function.
          */
-        launch(gamepad1.rightBumperWasPressed());
+        //  launch(gamepad1.rightBumperWasPressed());
 
         /*
          * Show the state and motor powers
@@ -317,6 +340,7 @@ public class StarterBotTeleop extends OpMode {
         telemetry.update();
     }
 
+    /*
     void launch(boolean shotRequested) {
         telemetry.addData("into launch ",shotRequested);
         switch (launchState) {
@@ -355,5 +379,5 @@ public class StarterBotTeleop extends OpMode {
                 }
                 break;
         }
-    }
+    } */
 }

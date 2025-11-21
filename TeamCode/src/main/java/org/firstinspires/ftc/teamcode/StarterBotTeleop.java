@@ -252,11 +252,11 @@ public class StarterBotTeleop extends OpMode {
             telemetry.addData("Gamepad b pressed", true);
         } else if (gamepad1.x) { // reverse direction
             telemetry.addData("Gamepad x pressed", true);
-            launcher.setVelocity(LAUNCHER_TARGET_REVERSE_VELOCITY);
-            leftFeeder.setPower(-1.0);
-            rightFeeder.setPower(1.0);
-            intake.setPower(-1.0);
-            pusher.setPower(-1.0);
+            launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+           // leftFeeder.setPower(-1.0);
+           // rightFeeder.setPower(1.0);
+          //  intake.setPower(-1.0);
+           // pusher.setPower(-1.0);
         }
         if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed", true);
@@ -337,6 +337,7 @@ public class StarterBotTeleop extends OpMode {
         // Show the elapsed game time and wheel power.
         telemetry.addData("Front left/Right", "%4.2f, %4.2f", frontLeftPower, frontRightPower);
         telemetry.addData("Back  left/Right", "%4.2f, %4.2f", backLeftPower, backRightPower);
+        telemetry.addData("Speed", launcher.getVelocity());
         telemetry.update();
     }
 

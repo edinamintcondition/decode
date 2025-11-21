@@ -60,7 +60,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name = "StarterBotTeleop1", group = "StarterBot")
-@Disabled
+//@Disabled
 public class StarterBotAuto extends OpMode {
     final double FEED_TIME_SECONDS = 0.50; //The feeder servos run this long when a shot is requested.
     final double STOP_SPEED = 0.0; //We send this power to the servos when we want them to stop.
@@ -72,9 +72,11 @@ public class StarterBotAuto extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 80;
-    final double LAUNCHER_TARGET_REVERSE_VELOCITY = -80;
+    final double LAUNCHER_TARGET_VELOCITY = 75;
+    final double LAUNCHER_MAX_VELOCITY = 80;
     final double LAUNCHER_MIN_VELOCITY = 65;
+    final double LAUNCHER_TARGET_REVERSE_VELOCITY = -80;
+
 
     // Declare OpMode members.
     private DcMotor leftFrontDrive = null;
@@ -267,7 +269,7 @@ public class StarterBotAuto extends OpMode {
         }
         if (gamepad1.rightBumperWasPressed()) {
             telemetry.addData("rightBumperWasPressed", true);
-            launcher.setVelocity(100.0);
+            launcher.setVelocity(65.0);
             intake.setPower(1.0);
             pusher.setPower(1.0);
             leftFeeder.setPower(1.0);

@@ -8,12 +8,13 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import pedroPathing.Constants;
 /**THIS IS AN EXAMPLE AND MAY NOT WORK ON THE CURRENT ROBOT: REFER TO DOC ON DETAILS IN HOW IT WORKS: https://pedropathing.com/docs/pathing/examples/auto**/
 @Autonomous(name = "Example Auto #1", group = "Auto")
-public class PedroPathingExampleAuto extends OpMode {
+public class PedroPathingExampleAuto extends LinearOpMode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
     private int pathState;
@@ -175,6 +176,11 @@ public class PedroPathingExampleAuto extends OpMode {
         telemetry.addData("y", follower.getPose().getY());
         telemetry.addData("heading", follower.getPose().getHeading());
         telemetry.update();
+    }
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        
     }
 
     /** This method is called once at the init of the OpMode. **/

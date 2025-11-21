@@ -224,6 +224,10 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
         telemetry.addData("Press B to Stop everything ",null);
         telemetry.addData("Press A to Stop Launcher ",null);
         telemetry.addData("Press RB to Launcher  with Max speed",LAUNCHER_MAX_VELOCITY);
+        telemetry.addData("Press dpad_left to set launcher Launcher with MIN speed",LAUNCHER_MIN_VELOCITY);
+        telemetry.addData("Press dpad_right to set launcher Launcher with MIN speed",LAUNCHER_MAX_VELOCITY);
+        telemetry.addData("Press dpad_up to increase the speed",launcherVelocity);
+        telemetry.addData("Press dpad_down to increase the speed",launcherVelocity);
 
         /*
          * Here we give the user control of the speed of the launcher motor without automatically

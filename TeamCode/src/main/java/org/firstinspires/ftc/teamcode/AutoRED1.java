@@ -55,13 +55,12 @@ public class AutoRED1 extends OpMode {
         public PathChain Path3;
         public PathChain Path4;
         public PathChain Path5;
-        public PathChain Path6;
 
         public Paths(Follower follower) {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(107.122, 35.317))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(38.244, 35.512))
                     )
                     .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
                     .build();
@@ -69,7 +68,7 @@ public class AutoRED1 extends OpMode {
             Path2 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(107.122, 35.317), new Pose(130.146, 35.317))
+                            new BezierLine(new Pose(38.244, 35.512), new Pose(15.610, 35.317))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
@@ -77,7 +76,7 @@ public class AutoRED1 extends OpMode {
             Path3 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(130.146, 35.317), new Pose(71.220, 71.220))
+                            new BezierLine(new Pose(15.610, 35.317), new Pose(118.439, 130.537))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
@@ -85,7 +84,7 @@ public class AutoRED1 extends OpMode {
             Path4 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(71.220, 71.220), new Pose(122.537, 121.561))
+                            new BezierLine(new Pose(118.439, 130.537), new Pose(62.829, 32.976))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
@@ -93,15 +92,7 @@ public class AutoRED1 extends OpMode {
             Path5 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(122.537, 121.561), new Pose(58.341, 33.756))
-                    )
-                    .setTangentHeadingInterpolation()
-                    .build();
-
-            Path6 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(58.341, 33.756), new Pose(105.561, 34.537))
+                            new BezierLine(new Pose(62.829, 32.976), new Pose(39.024, 32.976))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
@@ -115,4 +106,3 @@ public class AutoRED1 extends OpMode {
         return pathState;
     }
 }
-

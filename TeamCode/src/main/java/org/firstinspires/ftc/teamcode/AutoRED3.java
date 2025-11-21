@@ -11,6 +11,7 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import pedroPathing.Constants;
+
 @Autonomous(name = "Pedro Pathing Autonomous", group = "Autonomous")
 @Configurable // Panels
 public class AutoRED3 extends OpMode {
@@ -48,58 +49,49 @@ public class AutoRED3 extends OpMode {
 
     public static class Paths {
 
-        public PathChain Path1;
-        public PathChain Path2;
-        public PathChain Path3;
-        public PathChain Path4;
-        public PathChain Path5;
-        public PathChain Path6;
+        public PathChain tozheballs;
+        public PathChain collectzheballs;
+        public PathChain drivetozhepillarthingy;
+        public PathChain backtozhemiddle;
+        public PathChain parkzherobot;
 
         public Paths(Follower follower) {
-            Path1 = follower
+            tozheballs = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(103.220, 83.512))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(36.878, 83.707))
                     )
                     .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
                     .build();
 
-            Path2 = follower
+            collectzheballs = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(103.220, 83.512), new Pose(130.341, 83.707))
+                            new BezierLine(new Pose(36.878, 83.707), new Pose(14.244, 83.707))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            Path3 = follower
+            drivetozhepillarthingy = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(130.341, 83.707), new Pose(105.366, 104.780))
+                            new BezierLine(new Pose(14.244, 83.707), new Pose(119.415, 128.195))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            Path4 = follower
+            backtozhemiddle = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(105.366, 104.780), new Pose(123.707, 122.732))
+                            new BezierLine(new Pose(119.415, 128.195), new Pose(63.610, 32.390))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            Path5 = follower
+            parkzherobot = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(123.707, 122.732), new Pose(54.634, 33.366))
-                    )
-                    .setTangentHeadingInterpolation()
-                    .build();
-
-            Path6 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(54.634, 33.366), new Pose(105.366, 33.756))
+                            new BezierLine(new Pose(63.610, 32.390), new Pose(39.024, 32.195))
                     )
                     .setTangentHeadingInterpolation()
                     .build();

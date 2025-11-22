@@ -72,8 +72,8 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_MAX_VELOCITY = 150;
-    final double LAUNCHER_TARGET_VELOCITY = 80;
+    final double LAUNCHER_MAX_VELOCITY = 110;
+    final double LAUNCHER_TARGET_VELOCITY = 70;
     final double LAUNCHER_MIN_VELOCITY = 50;
     double launcherVelocity = LAUNCHER_TARGET_VELOCITY; // Dynamic velocity
 
@@ -250,13 +250,13 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             pusher.setPower(STOP_SPEED);
             telemetry.addData("Gamepad b pressed", true);
         } else if (gamepad1.x) { // reverse direction
-            telemetry.addData("Only launcher running on x with target velocity", true);
-            launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-            leftFeeder.setPower(STOP_SPEED);
-            rightFeeder.setPower(STOP_SPEED);
+            telemetry.addData("Reverse Direction", true);
+            launcher.setVelocity(-30);
             intake.setPower(STOP_SPEED);
-            pusher.setPower(STOP_SPEED);
-            telemetry.addData("Only launcher running on x with target velocity", true);
+            pusher.setPower(-1.0);
+            leftFeeder.setPower(-1.0);
+            rightFeeder.setPower(1.0);
+
         }
         if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed, launcher is stopped", true);
@@ -278,6 +278,15 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             telemetry.addData("speed is", launcher.getVelocity());
          //   launcher.setVelocity(launcherVelocity);
             telemetry.addData("rightBumperWasPressed, launches with speed ", LAUNCHER_MAX_VELOCITY);
+        }
+        if (gamepad1.leftBumperWasPressed()) {
+            telemetry.addData("rightBumperWasPressed", LAUNCHER_TARGET_VELOCITY);
+            launcher.setVelocity(launcherVelocity);
+            intake.setPower(STOP_SPEED);
+            pusher.setPower(STOP_SPEED);
+            leftFeeder.setPower(STOP_SPEED);
+            rightFeeder.setPower(STOP_SPEED);
+            telemetry.addData("speed is", launcher.getVelocity());
         }
 
         /*

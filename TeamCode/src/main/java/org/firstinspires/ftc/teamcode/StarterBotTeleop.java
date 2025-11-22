@@ -251,12 +251,13 @@ public class StarterBotTeleop extends OpMode {
             pusher.setPower(STOP_SPEED);
             telemetry.addData("Gamepad b pressed", true);
         } else if (gamepad1.x) { // reverse direction
-            telemetry.addData("Gamepad x pressed", true);
-            launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-           // leftFeeder.setPower(-1.0);
-           // rightFeeder.setPower(1.0);
-          //  intake.setPower(-1.0);
-           // pusher.setPower(-1.0);
+            telemetry.addData("Reverse Direction", true);
+            launcher.setVelocity(-30);
+            intake.setPower(STOP_SPEED);
+            pusher.setPower(-1.0);
+            leftFeeder.setPower(-1.0);
+            rightFeeder.setPower(1.0);
+
         }
         if (gamepad1.a) {
             telemetry.addData("Gamepad a pressed", true);
@@ -267,12 +268,21 @@ public class StarterBotTeleop extends OpMode {
             rightFeeder.setPower(-1.0);
         }
         if (gamepad1.rightBumperWasPressed()) {
-            telemetry.addData("rightBumperWasPressed", true);
+            telemetry.addData("rightBumperWasPressed", 100);
             launcher.setVelocity(100.0);
             intake.setPower(1.0);
             pusher.setPower(1.0);
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
+            telemetry.addData("speed is", launcher.getVelocity());
+        }
+        if (gamepad1.leftBumperWasPressed()) {
+            telemetry.addData("rightBumperWasPressed", LAUNCHER_TARGET_VELOCITY);
+            launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+            intake.setPower(STOP_SPEED);
+            pusher.setPower(STOP_SPEED);
+            leftFeeder.setPower(STOP_SPEED);
+            rightFeeder.setPower(STOP_SPEED);
             telemetry.addData("speed is", launcher.getVelocity());
         }
 

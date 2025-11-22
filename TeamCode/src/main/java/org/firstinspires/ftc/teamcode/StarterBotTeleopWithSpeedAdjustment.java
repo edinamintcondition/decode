@@ -74,7 +74,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
      */
     final double LAUNCHER_MAX_VELOCITY = 150;
     final double LAUNCHER_TARGET_VELOCITY = 80;
-    final double LAUNCHER_MIN_VELOCITY = 60;
+    final double LAUNCHER_MIN_VELOCITY = 50;
     double launcherVelocity = LAUNCHER_TARGET_VELOCITY; // Dynamic velocity
 
     // Declare OpMode members.
@@ -158,7 +158,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
         leftFeeder.setPower(STOP_SPEED);
         rightFeeder.setPower(STOP_SPEED);
 
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(30, 0, 0, 15));
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 15));
 
         /*
          * Much like our drivetrain motors, we set the left feeder servo to reverse so that they
@@ -216,7 +216,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             launcherVelocity -= 5; // decrease by 5 ticks/sec
         }
         // Clamp velocity between 0 and LAUNCHER_MAX_VELOCITY
-        launcherVelocity = Math.max(0, Math.min(LAUNCHER_MAX_VELOCITY, launcherVelocity));
+        launcherVelocity = Math.max(LAUNCHER_MIN_VELOCITY, Math.min(LAUNCHER_MAX_VELOCITY, launcherVelocity));
         telemetry.addData("Launcher Velocity", launcherVelocity);
         telemetry.addData("*************************", launcherVelocity);
         telemetry.addData("Press Y to Lunch with  speed -", launcherVelocity);
@@ -242,7 +242,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
         } else if (gamepad1.b) { // stop flywheel
-            telemetry.addData("Gamepad b pressed, evrything stopped", true);
+            telemetry.addData("Gamepad b pressed, everything stopped", true);
             launcher.setVelocity(STOP_SPEED);
             leftFeeder.setPower(STOP_SPEED);
             rightFeeder.setPower(STOP_SPEED);

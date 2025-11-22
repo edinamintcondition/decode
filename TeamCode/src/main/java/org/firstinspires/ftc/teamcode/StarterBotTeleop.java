@@ -72,7 +72,7 @@ public class StarterBotTeleop extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 80;
+    final double LAUNCHER_TARGET_VELOCITY = 70;
     final double LAUNCHER_TARGET_REVERSE_VELOCITY = -80;
     final double LAUNCHER_MIN_VELOCITY = 65;
 

@@ -7,6 +7,7 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -184,7 +185,10 @@ public class ExampleAuto extends OpMode {
         pathTimer = new Timer();
         opmodeTimer = new Timer();
         opmodeTimer.resetTimer();
-
+        /*BNO055IMU imu = hardwareMap.get(BNO055IMU.class,"imu");
+        BNO055IMU.Parameters imuPrameters = new BNO055IMU.Parameters();
+        imuPrameters.angleUnit=BNO055IMU.AngleUnit.RADIANS;
+        imu.initialize(imuPrameters);*/
 
         follower = Constants.createFollower(hardwareMap);
         buildPaths();

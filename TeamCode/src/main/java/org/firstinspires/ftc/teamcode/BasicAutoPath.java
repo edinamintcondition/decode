@@ -14,6 +14,7 @@ import pedroPathing.Constants;
 //@Disabled
 public class BasicAutoPath extends OpMode {
 
+    public int pathState;
     public PathChain FiveFeetForward;
     public Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
@@ -26,12 +27,34 @@ public class BasicAutoPath extends OpMode {
                 .setConstantHeadingInterpolation(Math.toRadians(90))
                 .build();
     }
+    public void autoPathUpdate() {
+        switch (pathState) {
+            case 0:
+                follower.followPath(FiveFeetForward);
+                setPathState(1);
+                break;
+            case 1:
+                /* This case checks the robot's position and will wait until the robot position is close (1 inch away) from the scorePose's position */
+                if(!follower.isBusy()) {
+                    /* Set the state to a Case we won't use or define, so it just stops running an new paths */
+                    setPathState(-1);
+                }
+                break;
 
+        }
+    }
+
+    public void setPathState(int pState) {
+        pathState = pState;
+        pathTimer.resetTimer();
+    }
     @Override
     public void init() {
         pathTimer = new Timer();
         opmodeTimer = new Timer();
         opmodeTimer.resetTimer();
+
+        follower = Constants.createFollower(hardwareMap);
 
         buildPaths();
         follower.setStartingPose(startPose);

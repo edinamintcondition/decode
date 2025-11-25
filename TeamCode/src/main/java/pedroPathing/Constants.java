@@ -22,6 +22,7 @@ import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 /*
 public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants();
@@ -29,17 +30,15 @@ public class Constants {
     public static Follower createFollower(HardwareMap hardwareMap) {
 
         DriveEncoderConstants driveEncoderConstants = new DriveEncoderConstants();
-        driveEncoderConstants.leftFrontMotorName="frontLeftMotor";
-        driveEncoderConstants.rightFrontMotorName="frontRightMotor";
-        driveEncoderConstants.leftRearMotorName="backLeftMotor";
-        driveEncoderConstants.rightRearMotorName="backRightMotor";
+        driveEncoderConstants.leftFrontMotorName="frontLeft";
+        driveEncoderConstants.rightFrontMotorName="frontRight";
+        driveEncoderConstants.leftRearMotorName="backLeft";
+        driveEncoderConstants.rightRearMotorName="backRight";
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .pathConstraints(pathConstraints).setLocalizer(new DriveEncoderLocalizer(hardwareMap, driveEncoderConstants))
                 .build();
     }
 }*/
-
-
 
 
 
@@ -103,10 +102,25 @@ public class Constants {
             .yVelocity(61.494551922189565);
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
-            .forwardPodY(0.75)
-            .strafePodX(-6.6);
-           // .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
-          //  .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED);
+            .forwardPodY(-5)
+            .strafePodX(0.5)
+            .distanceUnit(DistanceUnit.INCH)
+            .hardwareMapName("pinpoint")
+            .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
+            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
+            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+
+    public static DriveEncoderConstants localizerConstants = new DriveEncoderConstants()
+            .rightFrontMotorName("frontRightMotor")
+            .rightRearMotorName("backRightMotor")
+            .leftRearMotorName("backLeftMotor")
+            .leftFrontMotorName("frontLeftMotor")
+            .leftFrontEncoderDirection(Encoder.FORWARD)
+            .leftRearEncoderDirection(Encoder.FORWARD)
+            .rightFrontEncoderDirection(Encoder.FORWARD)
+            .rightRearEncoderDirection(Encoder.FORWARD)
+            .robotWidth()//ENTER ROBOT WIDTH HERE
+            .robotLength();//ENTER ROBOT LENGTH HERE
 
     /**
      These are the PathConstraints in order:
@@ -131,6 +145,7 @@ public class Constants {
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .mecanumDrivetrain(driveConstants)
+                .driveEncoderLocalizer(localizerConstants)
                 .pinpointLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
                 .build();

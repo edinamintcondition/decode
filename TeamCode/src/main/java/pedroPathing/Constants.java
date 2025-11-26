@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
 
+import com.pedropathing.ftc.localization.Encoder;
 import com.pedropathing.ftc.localization.constants.DriveEncoderConstants;
 import com.pedropathing.ftc.localization.localizers.DriveEncoderLocalizer;
 
@@ -101,7 +102,7 @@ public class Constants {
             .xVelocity(78.261926752421046666666666666667)
             .yVelocity(61.494551922189565);
 
-    public static PinpointConstants localizerConstants = new PinpointConstants()
+    public static PinpointConstants pinpointConstants = new PinpointConstants()
             .forwardPodY(-5)
             .strafePodX(0.5)
             .distanceUnit(DistanceUnit.INCH)
@@ -128,13 +129,22 @@ public class Constants {
             10,
             1
     );
+    public static DriveEncoderConstants localizerConstants = new DriveEncoderConstants()
+            .leftFrontMotorName("frontLeftMotor")
+            .leftRearMotorName("backLeftMotor")
+            .rightFrontMotorName("frontRightMotor")
+            .rightRearMotorName("backRightMotor")
+            .leftFrontEncoderDirection(Encoder.FORWARD)
+            .leftRearEncoderDirection(Encoder.FORWARD)
+            .rightFrontEncoderDirection(Encoder.FORWARD)
+            .rightRearEncoderDirection(Encoder.FORWARD);
 
     //Add custom localizers or drivetrains here
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .mecanumDrivetrain(driveConstants)
+                .pinpointLocalizer(pinpointConstants)
                 .driveEncoderLocalizer(localizerConstants)
-                .pinpointLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
                 .build();
     }

@@ -11,8 +11,9 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import pedroPathing.Constants;
+import pedroPathing.Constants1;
 
-@Autonomous(name = "Pedro Pathing Autonomous", group = "Autonomous")
+@Autonomous(name = "fiveInch", group = "Autonomous")
 @Configurable // Panels
 public class fiveinchauto extends OpMode {
 
@@ -25,7 +26,7 @@ public class fiveinchauto extends OpMode {
     public void init() {
         panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
-        follower = Constants.createFollower(hardwareMap);
+        follower = Constants1.createFollower(hardwareMap);
         follower.setStartingPose(new Pose(72, 8, Math.toRadians(90)));
 
         paths = new Paths(follower); // Build paths

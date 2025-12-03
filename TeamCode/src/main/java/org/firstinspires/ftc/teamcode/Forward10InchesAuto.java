@@ -1,8 +1,10 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode;
+
+import static com.google.blocks.ftcrobotcontroller.hardware.HardwareType.BNO055IMU;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.BNO055IMU;
+//import com.qualcomm.robotcore.hardware.BNO055IMU;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
@@ -11,8 +13,8 @@ import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathConstraints;
-import com.pedropathing.localization.constants.DriverEncoderConstants;
-import com.pedropathing.localization.localizers.DriverEncoderLocalizer;
+import com.pedropathing.ftc.localization.constants.DriveEncoderConstants;
+import com.pedropathing.ftc.localization.localizers.DriveEncoderLocalizer;
 
 @Autonomous(name = "Forward 10 Inches", group = "Test")
 public class Forward10InchesAuto extends LinearOpMode {
@@ -21,24 +23,24 @@ public class Forward10InchesAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        //  Initialize IMU
+        /*//  Initialize IMU
         BNO055IMU imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters imuParams = new BNO055IMU.Parameters();
         imuParams.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(imuParams);
+        imu.initialize(imuParams);*/
 
         //  Configure DriverEncoderConstants for GoBilda motors
-        DriverEncoderConstants encoderConstants = new DriverEncoderConstants()
-                .setLeftFrontMotor("leftFront")
-                .setLeftRearMotor("leftRear")
-                .setRightFrontMotor("rightFront")
-                .setRightRearMotor("rightRear")
-                .setTicksPerRev(537.6) // GoBilda 537 RPM motors
-                .setWheelRadius(1.8898) // 96mm wheels in inches
-                .setTrackWidth(13.5); // Distance between left and right wheels in inches
+        DriveEncoderConstants driveEncoderConstants = new DriveEncoderConstants();
+        driveEncoderConstants.leftFrontMotorName="frontLeft";
+        driveEncoderConstants.rightFrontMotorName="frontRight";
+        driveEncoderConstants.leftRearMotorName="backLeft";
+        driveEncoderConstants.rightRearMotorName="backRight";
+               // .setTicksPerRev(537.6) // GoBilda 537 RPM motors
+               // .setWheelRadius(1.8898) // 96mm wheels in inches
+              //  .setTrackWidth(13.5); // Distance between left and right wheels in inches
 
         //  Create Localizer
-        DriverEncoderLocalizer localizer = new DriverEncoderLocalizer(hardwareMap, encoderConstants);
+        DriveEncoderLocalizer localizer = new DriveEncoderLocalizer(hardwareMap, driveEncoderConstants);
 
         //  Create Follower
         FollowerConstants followerConstants = new FollowerConstants();

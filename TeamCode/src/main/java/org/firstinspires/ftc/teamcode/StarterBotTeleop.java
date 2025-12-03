@@ -260,7 +260,7 @@ public class StarterBotTeleop extends OpMode {
 
         }
         if (gamepad1.a) {
-            telemetry.addData("Gamepad a pressed", true);
+            telemetry.addData("Gamepad a pressed - launcher in stopped mode", true);
             launcher.setVelocity(STOP_SPEED);
             intake.setPower(1.0);
             pusher.setPower(1.0);
@@ -268,7 +268,7 @@ public class StarterBotTeleop extends OpMode {
             rightFeeder.setPower(-1.0);
         }
         if (gamepad1.rightBumperWasPressed()) {
-            telemetry.addData("rightBumperWasPressed", 100);
+            telemetry.addData("rightBumperWasPressed it will launch with 100 speed", 100);
             launcher.setVelocity(100.0);
             intake.setPower(1.0);
             pusher.setPower(1.0);
@@ -277,7 +277,7 @@ public class StarterBotTeleop extends OpMode {
             telemetry.addData("speed is", launcher.getVelocity());
         }
         if (gamepad1.leftBumperWasPressed()) {
-            telemetry.addData("rightBumperWasPressed", LAUNCHER_TARGET_VELOCITY);
+            telemetry.addData("leftBumperWasPressed only launcher will spin up", LAUNCHER_TARGET_VELOCITY);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
             intake.setPower(STOP_SPEED);
             pusher.setPower(STOP_SPEED);
@@ -337,6 +337,7 @@ public class StarterBotTeleop extends OpMode {
             backLeftPower   /= max;
             backRightPower  /= max;
         }
+
 
         // Send calculated power to wheels
         leftFrontDrive.setPower(frontLeftPower);

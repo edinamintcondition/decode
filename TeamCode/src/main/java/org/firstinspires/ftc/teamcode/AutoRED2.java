@@ -49,49 +49,58 @@ public class AutoRED2 extends OpMode {
 
     public static class Paths {
 
-        public PathChain toBalls;
-        public PathChain pickUp;
-        public PathChain ToDumpPlace;
-        public PathChain ToMiddle;
-        public PathChain Toparkplaceandpark;
+        public PathChain Path1;
+        public PathChain Path2;
+        public PathChain Path3;
+        public PathChain Path4;
+        public PathChain Path5;
+        public PathChain Path6;
 
         public Paths(Follower follower) {
-            toBalls = follower
+            Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(38.634, 60.098))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(98.146, 59.122))
                     )
                     .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
                     .build();
 
-            pickUp = follower
+            Path2 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(38.634, 60.098), new Pose(16.585, 60.098))
+                            new BezierLine(new Pose(98.146, 59.122), new Pose(130.146, 59.512))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            ToDumpPlace = follower
+            Path3 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(16.585, 60.098), new Pose(116.878, 131.902))
+                            new BezierLine(new Pose(130.146, 59.512), new Pose(72.195, 71.805))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            ToMiddle = follower
+            Path4 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(116.878, 131.902), new Pose(71.805, 32.780))
+                            new BezierLine(new Pose(72.195, 71.805), new Pose(122.341, 121.561))
                     )
                     .setTangentHeadingInterpolation()
                     .build();
 
-            Toparkplaceandpark = follower
+            Path5 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(71.805, 32.780), new Pose(38.829, 32.976))
+                            new BezierLine(new Pose(122.341, 121.561), new Pose(55.415, 32.780))
+                    )
+                    .setTangentHeadingInterpolation()
+                    .build();
+
+            Path6 = follower
+                    .pathBuilder()
+                    .addPath(
+                            new BezierLine(new Pose(55.415, 32.780), new Pose(103.610, 33.366))
                     )
                     .setTangentHeadingInterpolation()
                     .build();

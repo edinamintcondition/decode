@@ -72,7 +72,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_MAX_VELOCITY = 110;
+    final double LAUNCHER_MAX_VELOCITY = 90;
     final double LAUNCHER_TARGET_VELOCITY = 70;
     final double LAUNCHER_MIN_VELOCITY = 50;
     double launcherVelocity = LAUNCHER_TARGET_VELOCITY; // Dynamic velocity
@@ -211,9 +211,9 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             launcherVelocity = LAUNCHER_MAX_VELOCITY; // High speed preset
         }
         if (gamepad1.dpad_up) {
-            launcherVelocity += 5; // increase by 5 ticks/sec
+            launcherVelocity += 3; // increase by 5 ticks/sec
         } else if (gamepad1.dpad_down) {
-            launcherVelocity -= 5; // decrease by 5 ticks/sec
+            launcherVelocity -= 3; // decrease by 5 ticks/sec
         }
         // Clamp velocity between 0 and LAUNCHER_MAX_VELOCITY
         launcherVelocity = Math.max(LAUNCHER_MIN_VELOCITY, Math.min(LAUNCHER_MAX_VELOCITY, launcherVelocity));
@@ -280,7 +280,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
             telemetry.addData("rightBumperWasPressed, launches with speed ", LAUNCHER_MAX_VELOCITY);
         }
         if (gamepad1.leftBumperWasPressed()) {
-            telemetry.addData("rightBumperWasPressed", LAUNCHER_TARGET_VELOCITY);
+            telemetry.addData("leftBumperWasPressed", LAUNCHER_TARGET_VELOCITY);
             launcher.setVelocity(launcherVelocity);
             intake.setPower(STOP_SPEED);
             pusher.setPower(STOP_SPEED);

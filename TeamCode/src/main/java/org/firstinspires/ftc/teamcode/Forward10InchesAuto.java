@@ -31,10 +31,10 @@ public class Forward10InchesAuto extends LinearOpMode {
 
         //  Configure DriverEncoderConstants for GoBilda motors
         DriveEncoderConstants driveEncoderConstants = new DriveEncoderConstants();
-        driveEncoderConstants.leftFrontMotorName="frontLeft";
-        driveEncoderConstants.rightFrontMotorName="frontRight";
-        driveEncoderConstants.leftRearMotorName="backLeft";
-        driveEncoderConstants.rightRearMotorName="backRight";
+        driveEncoderConstants.leftFrontMotorName="frontLeftMotor";
+        driveEncoderConstants.rightFrontMotorName="frontRightMotor";
+        driveEncoderConstants.leftRearMotorName="backLeftMotor";
+        driveEncoderConstants.rightRearMotorName="backRightMotor";
                // .setTicksPerRev(537.6) // GoBilda 537 RPM motors
                // .setWheelRadius(1.8898) // 96mm wheels in inches
               //  .setTrackWidth(13.5); // Distance between left and right wheels in inches

@@ -126,7 +126,7 @@ public class StarterBotTeleop extends OpMode {
      */
     @Override
     public void init() {
-        launchState = LaunchState.IDLE;
+      //  launchState = LaunchState.IDLE;
 
         /*
          * Initialize the hardware variables. Note that the strings used here as parameters
@@ -296,7 +296,7 @@ public class StarterBotTeleop extends OpMode {
         /*
          * Show the state and motor powers
          */
-        telemetry.addData("State", launchState);
+      //  telemetry.addData("State", launchState);
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
         telemetry.addData("motorSpeed", launcher.getVelocity());
 

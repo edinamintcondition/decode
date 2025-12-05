@@ -73,7 +73,7 @@ public class StarterBotTeleopWithSpeedAdjustment extends OpMode {
      * at. The minimum velocity is a threshold for determining when to fire.
      */
     final double LAUNCHER_MAX_VELOCITY = 90;
-    final double LAUNCHER_TARGET_VELOCITY = 70;
+    final double LAUNCHER_TARGET_VELOCITY = 78;
     final double LAUNCHER_MIN_VELOCITY = 50;
     double launcherVelocity = LAUNCHER_TARGET_VELOCITY; // Dynamic velocity
 

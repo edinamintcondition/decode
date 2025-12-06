@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import static com.google.blocks.ftcrobotcontroller.hardware.HardwareType.BNO055IMU;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.hardware.BNO055IMU;
 
@@ -17,6 +18,7 @@ import com.pedropathing.ftc.localization.constants.DriveEncoderConstants;
 import com.pedropathing.ftc.localization.localizers.DriveEncoderLocalizer;
 
 @Autonomous(name = "Forward 10 Inches", group = "Test")
+@Disabled
 public class Forward10InchesAuto extends LinearOpMode {
 
     private Follower follower;

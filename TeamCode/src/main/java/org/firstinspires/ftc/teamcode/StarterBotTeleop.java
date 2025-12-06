@@ -72,7 +72,7 @@ public class StarterBotTeleop extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 70;
+    final double LAUNCHER_TARGET_VELOCITY = 75;
     final double LAUNCHER_TARGET_REVERSE_VELOCITY = -80;
     final double LAUNCHER_MIN_VELOCITY = 65;
 
@@ -88,6 +88,8 @@ public class StarterBotTeleop extends OpMode {
     private CRServo rightFeeder = null;
 
     private DcMotor intake = null;
+
+    boolean isSlow = false;
 
     // ElapsedTime feederTimer = new ElapsedTime();
 
@@ -267,7 +269,7 @@ public class StarterBotTeleop extends OpMode {
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
         }
-        if (gamepad1.rightBumperWasPressed()) {
+       /* if (gamepad1.rightBumperWasPressed()) {
             telemetry.addData("rightBumperWasPressed it will launch with 100 speed", 100);
             launcher.setVelocity(100.0);
             intake.setPower(1.0);
@@ -275,6 +277,10 @@ public class StarterBotTeleop extends OpMode {
             leftFeeder.setPower(1.0);
             rightFeeder.setPower(-1.0);
             telemetry.addData("speed is", launcher.getVelocity());
+
+        }*/
+        if(gamepad1.rightBumperWasReleased()){
+            isSlow = !isSlow;
         }
         if (gamepad1.leftBumperWasPressed()) {
             telemetry.addData("leftBumperWasPressed only launcher will spin up", LAUNCHER_TARGET_VELOCITY);
@@ -336,6 +342,13 @@ public class StarterBotTeleop extends OpMode {
             frontRightPower /= max;
             backLeftPower   /= max;
             backRightPower  /= max;
+        }
+
+        if (isSlow) {
+            leftFrontDrive.setPower(frontLeftPower * 0.25);
+            rightFrontDrive.setPower(frontRightPower * 0.25);
+            leftBackDrive.setPower(backLeftPower * 0.25);
+            rightBackDrive.setPower(backRightPower * 0.25);
         }
 
 

@@ -1,0 +1,20 @@
+Control hub
+    Motors
+        0   backLeftMotor
+        1   frontLeftMotor
+        2   pusher
+        3   launcher
+
+    Servos
+        0   left_feeder (cont rotation servo)
+
+
+
+Expansion Hub
+    Motors
+        0   intake
+        1 frontRightMotor
+        3   backRightMotor
+
+     Servos
+        0   right_feeder

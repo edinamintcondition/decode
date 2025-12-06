@@ -75,8 +75,8 @@ public class FirstAutoJustToRun extends LinearOpMode {
 
         // Initialize the drive system variables.
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeftMotor");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRightMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRightMotor");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -108,7 +108,7 @@ public class FirstAutoJustToRun extends LinearOpMode {
         }
 
         // Step 2:  Spin right for 1.3 seconds
-        leftFrontDrive.setPower(TURN_SPEED);
+       /* leftFrontDrive.setPower(TURN_SPEED);
         leftBackDrive.setPower(TURN_SPEED);
         rightFrontDrive.setPower(-TURN_SPEED);
         rightBackDrive.setPower(-TURN_SPEED);
@@ -116,7 +116,7 @@ public class FirstAutoJustToRun extends LinearOpMode {
         while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
-        }
+        }*/
 
         // Step 3:  Drive Backward for 1 Second
         leftFrontDrive.setPower(-FORWARD_SPEED);

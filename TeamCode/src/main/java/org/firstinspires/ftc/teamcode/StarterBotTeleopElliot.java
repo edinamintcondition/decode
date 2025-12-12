@@ -87,6 +87,7 @@ public class StarterBotTeleopElliot extends OpMode {
     private DcMotor intake = null;
 
     boolean isSlow = false;
+    boolean omni = false;
 
     // ElapsedTime feederTimer = new ElapsedTime();
 
@@ -279,7 +280,15 @@ public class StarterBotTeleopElliot extends OpMode {
         if(gamepad1.rightBumperWasReleased()){
             isSlow = !isSlow;
         }
+
+
+        if(gamepad1.dpadDownWasReleased()) {
+            omni = !omni;
+        }
+
+
         if (gamepad1.leftBumperWasPressed()) {
+
             telemetry.addData("leftBumperWasPressed only launcher will spin up", LAUNCHER_TARGET_VELOCITY);
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
             intake.setPower(STOP_SPEED);
@@ -319,13 +328,13 @@ public class StarterBotTeleopElliot extends OpMode {
         // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
         double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
         double yaw     =  gamepad1.left_stick_x;
-
+        double laterial = gamepad1.right_stick_y;
         // Combine the joystick requests for each axis-motion to determine each wheel's power.
         // Set up a variable for each drive wheel to save the power level for telemetry.
-        double frontLeftPower  = axial + yaw;
-        double frontRightPower = axial - yaw;
-        double backLeftPower   = axial + yaw;
-        double backRightPower  = axial - yaw;
+        double frontLeftPower  = axial + yaw + laterial;
+        double frontRightPower = axial - yaw + laterial;
+        double backLeftPower   = axial + yaw - laterial;
+        double backRightPower  = axial - yaw - laterial;
 
         // Normalize the values so no wheel power exceeds 100%
         // This ensures that the robot maintains the desired motion.
@@ -347,6 +356,13 @@ public class StarterBotTeleopElliot extends OpMode {
             rightBackDrive.setPower(backRightPower * 0.25);
         }
 
+        if (omni){
+            leftFrontDrive.setPower(frontLeftPower * 1);
+            rightFrontDrive.setPower(frontRightPower * -1);
+            leftBackDrive.setPower(backLeftPower * -1);
+            rightBackDrive.setPower(backRightPower * 1);
+        }
+
 
         // Send calculated power to wheels
         leftFrontDrive.setPower(frontLeftPower);
@@ -361,7 +377,14 @@ public class StarterBotTeleopElliot extends OpMode {
         telemetry.update();
 
 
+
+
+
+
+
     }
+
+
 
         
     /*

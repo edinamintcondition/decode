@@ -12,7 +12,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-@Disabled
 @Autonomous(name = "Pedro Pathing Autonomous", group = "Autonomous")
 @Configurable // Panels
 public class AutoRed extends OpMode {
@@ -51,41 +50,14 @@ public class AutoRed extends OpMode {
     public static class Paths {
 
         public PathChain Path1;
-        public PathChain Path2;
-        public PathChain Path3;
-        public PathChain Path4;
 
         public Paths(Follower follower) {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(41.171, 35.512))
+                            new BezierLine(new Pose(93.073, 8.390), new Pose(101.463, 100.878))
                     )
-                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
-                    .build();
-
-            Path2 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(41.171, 35.512), new Pose(15.220, 35.122))
-                    )
-                    .setTangentHeadingInterpolation()
-                    .build();
-
-            Path3 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(15.220, 35.122), new Pose(72.000, 71.805))
-                    )
-                    .setTangentHeadingInterpolation()
-                    .build();
-
-            Path4 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(72.000, 71.805), new Pose(57.756, 84.683))
-                    )
-                    .setTangentHeadingInterpolation()
+                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(45))
                     .build();
         }
     }
@@ -97,4 +69,3 @@ public class AutoRed extends OpMode {
         return pathState;
     }
 }
-

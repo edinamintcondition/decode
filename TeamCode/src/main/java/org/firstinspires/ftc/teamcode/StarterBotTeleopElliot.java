@@ -34,6 +34,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -87,7 +88,7 @@ public class StarterBotTeleopElliot extends OpMode {
     private DcMotor intake = null;
 
     boolean isSlow = false;
-    boolean omni = false;
+  //  boolean omni = false;
 
     // ElapsedTime feederTimer = new ElapsedTime();
 
@@ -282,9 +283,9 @@ public class StarterBotTeleopElliot extends OpMode {
         }
 
 
-        if(gamepad1.dpadDownWasReleased()) {
+       /* if(gamepad1.dpadDownWasReleased()) {
             omni = !omni;
-        }
+        }*/
 
 
         if (gamepad1.leftBumperWasPressed()) {
@@ -356,12 +357,12 @@ public class StarterBotTeleopElliot extends OpMode {
             rightBackDrive.setPower(backRightPower * 0.25);
         }
 
-        if (omni){
+       /* if (omni){
             leftFrontDrive.setPower(frontLeftPower * 1);
             rightFrontDrive.setPower(frontRightPower * -1);
             leftBackDrive.setPower(backLeftPower * -1);
             rightBackDrive.setPower(backRightPower * 1);
-        }
+        }*/
 
 
         // Send calculated power to wheels
